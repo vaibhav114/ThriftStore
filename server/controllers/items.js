@@ -80,19 +80,34 @@ const deleteItem = async(req,res)=>{
     }
     res.status(StatusCodes.OK).json(item)
 }
+const soldItem = async (req, res) => {
+    const { products, sold } = req.body;
+    console.log("Sold ITM ");
+    console.log(products);
 
-const soldItem =async(req,res)=>{
-    const {itemid,sold} = req.body
-    const item = await Items.findByIdAndUpdate(
-        {_id:itemid},
-        {sold:sold},
-    { new: true, runValidators: true }
-    )
-    if(!item){
-        throw new notFoundError("No item ith this ID To Delete ")
+    try {
+        const updatePromises = products.map(async (itm) => {
+            const item = await Items.findByIdAndUpdate(
+                itm.itemid,  // Use itm.itemid directly
+                { sold: sold },
+                { new: true, runValidators: true }
+            );
+
+            if (!item) {
+                throw new NotFoundError("No item with this ID found");
+            }
+
+            return item;
+        });
+
+        const updatedItems = await Promise.all(updatePromises);
+        res.status(StatusCodes.OK).json(updatedItems);
+    } catch (error) {
+        console.error(error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
     }
-    res.status(StatusCodes.OK).json(item)
-}
+};
+
 
 const latestItems = async(req,res)=>{
     const {

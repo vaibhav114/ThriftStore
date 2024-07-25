@@ -24,6 +24,7 @@ const OrdersPage = () => {
     <div>
       <div className="m-4 ">
       {
+      
   bookedData.length > 0 ? (
     <>
     <div>
@@ -33,7 +34,7 @@ const OrdersPage = () => {
     <div className="mt-4 ml-32 mr-32 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       {bookedData.map((data, index) => {
         return (
-         <BookedItem props={data}/>
+         <BookedItem props={data} key={index}/>
         );
       })}
       </div>

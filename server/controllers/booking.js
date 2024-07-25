@@ -27,15 +27,16 @@ const buyerMail = async(req,res)=>{
 
 
 const bookItem = async(req,res)=>{
-    const data  = req.body
+    const {data}  = req.body
+    console.log("BOOK ITM ",data)
     const booking = await Booking.create({...data})
     try {
         await transporter.sendMail({
             ...mailOptions,
-            to:req.body.mail,
+            to:req.body.data.mail,
             subject:"Product Sold",
             text:"Log Into Your Account",
-            html:`<h1>The Buyer Email is ${req.body.bmail} ,Get In Contact to proceed with selling</h1>`
+            html:`<h1>The Buyer Email is ${req.body.data.bmail} ,Get In Contact to proceed with selling</h1>`
         })
     } catch (error) {
         console.log(error)   
@@ -45,8 +46,11 @@ const bookItem = async(req,res)=>{
 
 const getBookItem  = async(req,res)=>{
     const { userId } = req.user
-    const booking = await Booking.find({buyer:userId}).populate('itemid')
+    const booking = await Booking.find({ buyer: userId })
+        .populate({
+            path: 'products.itemid',
+            model: 'Items'
+        });
     res.status(StatusCodes.OK).json(booking)
-
 }
 module.exports= {bookItem,getBookItem,getMail,buyerMail}  

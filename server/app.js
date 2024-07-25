@@ -8,6 +8,8 @@ const routerAccount = require('./routes/profile')
 const routerItems = require('./routes/items')
 const routerInitial = require('./routes/initial')
 const routerBooking = require('./routes/booking')
+const routerGoogleAuth = require('./routes/googleAuth')
+const routerCart = require('./routes/cart')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const errorHandlerMiddleware =require('./middleware/errorHandlerMiddleware')
@@ -28,16 +30,15 @@ app.use(cors({
     credentials:true
 }));
 
+app.use('/',routerGoogleAuth)
 app.use('/auth',routerAuth)
 app.use('/profile',routerAccount)
 app.use('/initial',routerInitial)
 app.use('/items',authentication,routerItems)
 app.use('/booking',authentication,routerBooking)
+app.use('/cart',authentication,routerCart)
 
-app.get('/',(req,res)=>{
-    console.log("Home")
-    res.status(200).json({msg:"HOME PAGE"})
-})
+
 
 const photosMiddleware = multer({dest:'uploads'})
 app.post('/uploads',photosMiddleware.array('photos',100) ,(req,res)=>{

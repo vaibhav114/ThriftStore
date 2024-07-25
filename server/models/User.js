@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
       type: String,
       required: [true, "Password Cannot Be Empty"],
       minlength: 6,
-    }
+    },
   });
 
 UserSchema.pre("save",async function(next){

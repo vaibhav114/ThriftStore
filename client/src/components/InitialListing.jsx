@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const InitialListing = ({props}) => {
-    console.log(props._id)
   return (
     <div className='max-w-96 border mb-10 mt-4'>
         <div>

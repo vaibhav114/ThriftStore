@@ -11,21 +11,31 @@ const BookingSchema = new mongoose.Schema({
         ref:"User",
         required:[true,"Buyer Id Required"]
     },
-    itemid:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Items",
-        required:[true,"Item Id Required"],
-        unique:true,
-        errorMessages: {
-            unique: 'Trying to book an Item which is already Booked '
-        }
-    },
     mail:{
         type:String
     },
     bmail:{
         type:String
-    }
+    },
+    amount:{
+        type:Number
+    },
+    total:{
+        type:Number
+    },
+    products: [
+        { 
+            itemid: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Items",
+                required: true,
+            },
+            iprice:{
+                type:String
+            }
+        }
+    ]
+
 },
 {timestamps:true})
 
