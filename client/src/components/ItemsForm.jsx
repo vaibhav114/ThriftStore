@@ -8,7 +8,7 @@ export const ItemsForm = () => {
   const [category, setCategory] = useState("upper");
   const [gender,setGender] = useState('male');
   const navigate = useNavigate();
-  //   const [addedPhotos, setAddedPhotos] = useState([]);
+  const [addedPhotos, setAddedPhotos] = useState([]);
   const [updateItem, setUpdateItem] = useState({});
   const { user } = useContext(UserContext);
   const [items, setItems] = useState({
@@ -65,17 +65,18 @@ export const ItemsForm = () => {
 
   const uploadPhoto = (e) => {
     const files = e.target.files;
+    console.log(files)
     const data = new FormData();
     for (let i = 0; i < files.length; i++) {
       data.append("photos", files[i]);
     }
     axios
-      .post("/uploads", data, {
+      .post("/uploads", data, { 
         headers: { "Content-type": "multipart/form-data" },
       })
       .then((response) => {
         const { data: filenames } = response;
-        console.log(filenames);
+        console.log(filenames); 
         setItems((prevItems) => ({
           ...prevItems,
           photos: [...prevItems.photos, ...filenames],
@@ -83,12 +84,21 @@ export const ItemsForm = () => {
       });
   };
 
-  const deletePhoto = (filename) => {
-    setItems((prevItems) => ({
+  const deletePhoto = async (e,filename) => {
+    e.preventDefault()
+    console.log(filename)
+    try {
+      axios.defaults.headers.common.Authorization = `Bearer ${user.token}`;
+      const response = await axios.patch(`/items/deleteimage/${id}` ,{filename})
+      setItems((prevItems) => ({
       ...prevItems,
       photos: prevItems.photos.filter((item) => item !== filename),
     }));
+    } catch (error) {
+      console.log(error)
+    }
   };
+
 
   const starPhoto =(e,filename)=>{
     e.preventDefault()
@@ -314,10 +324,10 @@ export const ItemsForm = () => {
                   <img
                     className="rounded-2xl w-full object-cover"
                     alt="img not found"
-                    src={"http://localhost:5000/" + link}
+                    src={link.includes("cloudinary") ? link : `http://localhost:5000/${link}`}
                   />
                   <button 
-                    onClick={() => deletePhoto(link)}
+                    onClick={(e) => deletePhoto(e,link)}
                     className="absolute bottom-1 right-1 text-white bg-black py-1 px-3 rounded-2xl bg-opacity-50"
                   >
                     <svg
