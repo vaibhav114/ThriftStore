@@ -27,7 +27,7 @@ app.use(cookieParser())
 const uploadsDirectory = path.join(__dirname, '/uploads');
 app.use('/uploads' ,express.static(uploadsDirectory))
 app.use(cors({
-     origin: 'http://localhost:5173',
+     origin: 'https://relaxed-starlight-7af617.netlify.app',
     credentials:true
 }));
 

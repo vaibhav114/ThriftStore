@@ -15,7 +15,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import CartPage from "./pages/CartPage";
 import SingleBookedItem from "./components/SingleBookedItem";
 
-axios.defaults.baseURL="http://localhost:5000"
+axios.defaults.baseURL="http://localhost:https://thriftstore-adp0.onrender.com"
 axios.defaults.withCredentials=true
 function App() {
   return (    
