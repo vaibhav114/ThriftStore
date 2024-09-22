@@ -1,6 +1,6 @@
 const {OAuth2Client} = require('google-auth-library')
 const {StatusCodes} = require('http-status-codes')
-
+require('dotenv').config()
 const User = require('../models/User')
 require('dotenv').config()
 const bcrypt = require('bcryptjs')
@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken')
 
 
 const googleAuth =async(req,res)=>{
-    const redirectUrl ='http://localhost:5000/oauth'
+    const redirectUrl =process.env.OAUTH_REDIRECT_URL
     const oAuth2Client = new OAuth2Client(
       process.env.CLIENT_ID,
       process.env.CLIENT_SECRET,
@@ -42,7 +42,7 @@ const googleAuth =async(req,res)=>{
     const code = req.query.code
 
     try {
-      const redirectUrl ='http://localhost:5000/oauth'
+      const redirectUrl =process.env.OAUTH_REDIRECT_URL
       const oAuth2Client = new OAuth2Client(
         process.env.CLIENT_ID,
         process.env.CLIENT_SECRET,
@@ -78,7 +78,7 @@ const googleAuth =async(req,res)=>{
       expiresIn:'30d'
     })
      res.cookie('token',token)
-    res.redirect('http://localhost:5173')
+    res.redirect(process.env.CROSS_ORIGIN_URL)
     } catch (error) {
       console.log(error)
       res.json({msg:"Google AUth Failed"})

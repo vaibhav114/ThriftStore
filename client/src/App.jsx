@@ -14,12 +14,16 @@ import { ItemContextProvider } from "./context/ItemContext";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import CartPage from "./pages/CartPage";
 import SingleBookedItem from "./components/SingleBookedItem";
+// import dotenv from 'dotenv'
 
-axios.defaults.baseURL="https://thriftstore-adp0.onrender.com"
+axios.defaults.baseURL=import.meta.env.VITE_APP_SERVER_URL
 axios.defaults.withCredentials=true
+
 function App() {
+  console.log(import.meta.env.VITE_APP_SERVER_URL)
   return (    
     <>
+    
     <UserContextProvider>
       <ItemContextProvider>
     <Routes>

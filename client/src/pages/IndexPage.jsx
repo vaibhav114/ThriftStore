@@ -21,7 +21,7 @@ const IndexPage =()=>{
                     const response = await axios.get('items/getallitems')
                     setAllItems(response.data)          
                     // dispatch(getCartItems({userId: user.userId}))
-                    console.log(user)
+                    // console.log(user)
                     
                 } catch (error) {
                     console.log(error)

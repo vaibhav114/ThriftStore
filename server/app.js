@@ -27,7 +27,7 @@ app.use(cookieParser())
 const uploadsDirectory = path.join(__dirname, '/uploads');
 app.use('/uploads' ,express.static(uploadsDirectory))
 app.use(cors({
-     origin: 'https://relaxed-starlight-7af617.netlify.app',
+     origin: process.env.CROSS_ORIGIN_URL,
     credentials:true
 }));
 
@@ -74,31 +74,6 @@ app.post('/uploads', photosMiddleware.array('photos', 100), (req, res) => {
     res.json(uploadedFiles);
 });
 
-// app.post('/uploads' ,upload.array('photos',10) , async(req,res)=>{
-//     if (!req.files) {
-//         return res.status(400).send('No file uploaded.');
-//       }
-//       try {
-//         console.log(req.files)
-//         const fileBuffer =  req.files.buffer ; 
-//         console.log(fileBuffer)
-//       } catch (error) {
-//         console.log(error)
-//       }
-
-//       return res.json({msg:"Success "})
-// })
-
-
-app.get('/test-cloudinary', (req, res) => {
-    cloudinary.uploader.upload("D:\\ThriftStore\\server\\uploads\\5e82924e54404459eed9ac171f9ef1dc.jpeg", function(error, result) {
-      if (error) {
-        return res.status(500).json({ error: error.message });
-      }
-      res.json({ url: result.secure_url });
-    });
-  });
-  
 
 app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);
