@@ -13,6 +13,7 @@ const routerCart = require('./routes/cart')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const errorHandlerMiddleware =require('./middleware/errorHandlerMiddleware')
+const router = require('./routes/Paymentroutes')
 const notFoundMiddleware = require('./middleware/notFoundMiddleware')
 const authentication = require('./middleware/authentication')
 const multer = require('multer')
@@ -21,6 +22,7 @@ const path = require('path');
 const port = process.env.PORT || 5000
 const upload = require('./utils/multer')
 const crypto = require('crypto');
+
 
 app.use(express.json());
 app.use(cookieParser())
@@ -38,6 +40,18 @@ app.use('/initial',routerInitial)
 app.use('/items',authentication,routerItems)
 app.use('/booking',authentication,routerBooking)
 app.use('/cart',authentication,routerCart)
+
+
+
+
+
+
+
+
+
+
+
+app.use('/api', router);
 
 
 
