@@ -35,11 +35,16 @@ const IndexPage =()=>{
         return <Navigate to={"/register"} />;
       }
       return <div>
-        <div className="">
-        <HomeCarousel />
+        <div className="ml-60  mr-60">
+        {/* <HomeCarousel /> */}
+        <img
+            className="d-block w-full h-[700px] "
+            src="./desk2.png"
+            alt="First slide"
+          />
         </div>
 
-        <div className=" mt-[650px]">
+        <div className="mt-10">
             <div>
                 <h1 className="flex justify-center text-4xl tracking-widest ">LATEST ARRIVALS</h1>
                 <div>

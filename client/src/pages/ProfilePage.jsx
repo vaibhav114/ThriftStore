@@ -19,13 +19,8 @@ const ProfilePage =()=>{
                 const response = await axios.patch("/items/updatepass",npass)
                 if(response.status ===200)
                 {
-                    Swal.fire({
-                        title: "Update Done",
-                        text: "Password Updated Successfull",
-                        icon: "success"
-                      });
+                    alert("Password Update Successfull ")
                 }
-                    navigate('/login')
                     window.location.reload();
             } catch (error) {
                 console.log(error)

@@ -22,7 +22,7 @@ const SingleCartItem = ({ props }) => {
                 <img
                   className="w-full object-cover"
                   alt="img not found"
-                  src={"http://localhost:5000/" + props.itemid.photos[0]}
+                  src={props.itemid.photos[0]}
                 />
               </div>
             )}
@@ -72,9 +72,10 @@ const SingleCartItem = ({ props }) => {
           <div>
             <button
               onClick={() =>
+                
                 dispatch(
                   deleteCartItem({
-                    payload: { itemid: props.itemid_id },
+                    payload: { itemid: props.itemid._id },
                     token: user?.token,
                   })
                 )

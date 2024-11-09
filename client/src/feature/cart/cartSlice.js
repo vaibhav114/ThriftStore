@@ -16,7 +16,7 @@ const init ={
 const getCartFromStorage = () => {
   try {
     const serializedValue = localStorage.getItem('cart');
-    console.log('SER VAL', serializedValue);
+    // console.log('SER VAL', serializedValue);
 
     if (serializedValue === null) {
       return undefined; // Item does not exist in localStorage
@@ -70,6 +70,7 @@ export const getCartItems = createAsyncThunk('cart/getCartItems',async ({userId,
 export const deleteCartItem = createAsyncThunk('cart/deleteCartItem' ,async({payload ,token} ,thunkAPI )=>{
   console.log("ASYNC CREMOVE CART ITEM")
   console.log("delet remove cart payload ",token)
+  console.log("PAYLOAD" ,payload)
   thunkAPI.dispatch(deleteFromCart(payload))
   const {cart} =thunkAPI.getState()
   console.log(cart.products.length)
@@ -147,15 +148,19 @@ const cartSlice = createSlice({
               }
             },
           deleteFromCart:(state,action)=>{
+            console.log(state)
             console.log(action.payload.itemid)
-            const removeProduct= state.products.find((itm)=> itm.itemid === action.payload.itemid)
-             const updatedProducts= state.products.filter((itm)=> itm.itemid != action.payload.itemid)
+            const removeProduct= state.products.find((itm)=> itm.itemid._id === action.payload.itemid)
+            console.log("remove Product " ,removeProduct)
+             const updatedProducts= state.products.filter((itm)=> itm.itemid._id != action.payload.itemid)
+             console.log(updatedProducts)
              const newState = {
               ...state,
               total:parseInt(state.total) - parseInt(removeProduct.iprice),
               amount:state.amount-1,
               products:updatedProducts
              }
+
              localStorage.setItem('cart',JSON.stringify(newState))
              console.log(newState)
              return newState

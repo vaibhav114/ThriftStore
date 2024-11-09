@@ -15,7 +15,7 @@ export const SoldItems = ({ props }) => {
               <img
                 className="w-full object-cover "
                 alt="img not found"
-                src={"http://localhost:5000/" + props.photos[0]}
+                src={props.photos[0]}
               />
             </div>
           )}

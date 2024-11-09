@@ -15,6 +15,8 @@ const OneItemList = () => {
   const [mail,setMail]=useState({})
   const [bmail,setBmail] =useState({})
   const navigate = useNavigate();
+
+
   useEffect(() => {
     if (user) {
       const fetchData = async () => {
@@ -58,14 +60,18 @@ const OneItemList = () => {
         },
         token:user?.token
     }))
+    alert("Item added to cart")
+    navigate('/cart')
   }
     else
     {
       const cart = JSON.parse(localStorage.getItem('cart'))
+      console.log("LOCAL CART " , cart)
+      console.log(itemData._id)
     if(cart.owner!=itemData.owner)
     {
       alert("Settle the current owner transaction")
-    }else if(cart.products.find((itm)=>itm.itemid == itemData._id ))
+    }else if(cart.products.find((itm)=>itm.itemid._id == itemData._id ))
     {
       alert("Item already added to cart")
     }
@@ -92,6 +98,7 @@ const OneItemList = () => {
     // if (user && itemData) {
     //   console.log(mail)
       addToCart()
+      alert("Item Placed to Order")
       navigate('/cart')
       // try {
       //   const response = await axios.post("/booking/item", {
@@ -136,7 +143,7 @@ const OneItemList = () => {
               <img
                 className=" w-full object-cover"
                 alt="img not found"
-                src={"http://localhost:5000/" + pic}
+                src={pic}
                 />
             </div>
           ))}

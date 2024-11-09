@@ -15,9 +15,11 @@ const CartPage = () => {
 
 
   const placeOrder = async () => {
+    alert("Orderng Item ........")
     const resultAction = await dispatch(bookItem({ token: user?.token }));
     if (resultAction.meta.requestStatus === "fulfilled") {
       queryClient.invalidateQueries(["item"]);
+      alert("ORDER PLACE SUCCESSFULLY , YOU WILL GET A MAIL FROM PRODUCT OWNER ")
       navigate("/shop");
     } else {
       console.error("Failed to book item", resultAction.error);
@@ -38,8 +40,8 @@ const CartPage = () => {
           Product Owner : {cart.mail}
         </h1>
         <div>
-          {cart.products.map((itm) => {
-            return <SingleCartItem key={itm.itemid} props={itm} />;
+          {cart.products.map((itm,index) => {
+            return <SingleCartItem key={index} props={itm} />;
           })}
         </div>
 
