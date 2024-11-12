@@ -29,13 +29,13 @@ async function sendVerificationEmail(email, otp) {
     }
   }
 
-UserVerificationSchema.pre("save", async function (next) {
-    console.log("New document saved to the database");
-    // Only send an email when a new document is created
-    if (this.isNew) {
-      await sendVerificationEmail(this.email, this.otp);
-    }
-    next();
-  });
+  UserVerificationSchema.pre("save", async function (next) {
+      console.log("New document saved to the database");
+      // Only send an email when a new document is created
+      if (this.isNew) {
+        await sendVerificationEmail(this.email, this.otp);
+      }
+      next();
+    });
 
 module.exports= mongoose.model("UserVerification",UserVerificationSchema);

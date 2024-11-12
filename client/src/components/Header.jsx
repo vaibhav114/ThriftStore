@@ -54,6 +54,11 @@ const Header = () => {
                 <div>SHOP</div>
               </Link>
             </li>
+            <Link to={"/donate"}> 
+              <li className="flex gap-2 p-2">
+                <div>DONATE</div>
+              </li>
+            </Link>
 
             <li className="flex gap-2 p-2">
               <svg

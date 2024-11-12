@@ -13,6 +13,7 @@ import ShopPage from "./pages/ShopPage";
 import { ItemContextProvider } from "./context/ItemContext";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import CartPage from "./pages/CartPage";
+import DonatePage from './pages/DonatePage';
 import SingleBookedItem from "./components/SingleBookedItem";
 // import dotenv from 'dotenv'
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/account/:subpage?" element={<AccountPage />}></Route>
         <Route path="/account/:subpage/:action" element={<AccountPage />}></Route>
         <Route path="/account/:subpage/single/:id" element={<ItemsForm />}></Route>
+        <Route path="/donate" element={<DonatePage />} ></Route>
         <Route path="/account/:subpage/pastorder/:id" element={<SingleBookedItem />} ></Route>
         <Route path="/items/book/:id" element={<OneItemList />  }></Route>
         <Route path="/cart"  element={<CartPage />}></Route>
