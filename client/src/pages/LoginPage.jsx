@@ -25,6 +25,7 @@ const LoginPage =()=>{
       console.log("Initiaal Login " + data.token)
       setUser(data)
       console.log("User "+ user.userId)
+      alert("LOGIN SUCCESSFULL")
       navigate('/')
     } catch (error) {
       // console.log(error.response.data.msg)

@@ -19,7 +19,7 @@ const BookedItem = ({ props }) => {
             <img
               className="w-full object-cover"
               alt="img not found"
-              src={"http://localhost:5000/" + oneProduct.photos[0]}
+              src={oneProduct.photos[0]}
             />
           </div>
         )}

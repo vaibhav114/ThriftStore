@@ -28,7 +28,7 @@ const SingleBookedItem = ({}) => {
                         <img
                           className="w-full object-cover"
                           alt="img not found"
-                          src={"http://localhost:5000/" + itm.itemid.photos[0]}
+                          src={itm.itemid.photos[0]}
                         />
                       </div>
                     )}

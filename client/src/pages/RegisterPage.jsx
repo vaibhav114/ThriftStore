@@ -25,6 +25,10 @@ const RegisterPage = () => {
       }
       const response = await axios.post("/auth/sendotp", { email: user.email });
       console.log(response);
+      if(response.status=200)
+      {
+        alert("OTP SEND TO YOUR MAIL ID ")
+      }
     } catch (error) {
       console.log("otp Sent error");
     }
@@ -34,6 +38,7 @@ const RegisterPage = () => {
     console.log(user);
     try {
       await axios.post("/auth/register", user);
+      alert("REGISTRING USER SUCCESSFULL  .... ")
       // axios.defaults.headers.common.Authorization = `Bearer ${data.token}`
       navigate("/login");
     } catch (error) {
